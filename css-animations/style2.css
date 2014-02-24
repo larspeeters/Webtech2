@@ -16,8 +16,18 @@ body,html{
 	-webkit-transform-origin: center;
 	 -webkit-animation: tilt 1.2s;
 	 -webkit-animation-fill-mode: forwards;
+	 overflow: hidden;
 	}
-
+#title{
+	padding-left: 100px;
+}
+#logo,#title{
+	margin-left: -400px;
+	-webkit-transition: -webkit-transform 1s;
+}
+.slide{
+		-webkit-transform: translateX(400px);
+}
 @-webkit-keyframes tilt
 {
  0% { -webkit-transform: perspective(400px) rotatex( 90deg ); opacity: 0; }
@@ -41,7 +51,8 @@ body,html{
 }
 	
 #logo{
-	float:left;}
+	float:left;
+}
 	
 #users{
 		margin-left: auto;
@@ -58,7 +69,4 @@ body,html{
 	
 img.pictures:hover{
 	-webkit-transform:scale(1.2,1.2);
-}
-p{
-	margin-left: 100px;	
 }

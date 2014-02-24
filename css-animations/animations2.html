@@ -6,7 +6,7 @@
 <title>Animation 2</title>
 </head>
 <body>
-<div id="slogan" ><img src="images/imd.png" alt="IMD" title="IMD" id="logo" /> <p><strong>Welcome to the IMD workshop</strong><br/>Please select a user below</p></div>
+<div id="slogan" ><img src="images/imd.png" alt="IMD" title="IMD" id="logo"  /> <p id="title"><strong>Welcome to the IMD workshop</strong><br/>Please select a user below</p></div>
 <div id="users" class="flip">
 	<a href=# ><img src="images/jesse.jpg" alt="user 1" title="User 1" class="pictures"/></a>
     <a href=# ><img src="images/ellen.jpg" alt="user 2" title="User 2" class="pictures" /></a>
@@ -15,10 +15,9 @@
 
 
 <script>
-$('.circle').click(function() {
-  $('#red').addClass('MoveRed');
-  $('#green').addClass('MoveGreen');
-  $('#yellow').addClass('MoveYellow');
+$(document).ready( function() {
+   $("#logo").addClass('slide');
+   $("#title").addClass('slide');
 });
 </script>
 
