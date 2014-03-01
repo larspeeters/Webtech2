@@ -1,0 +1,58 @@
+<!DOCTYPE html >
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" type="text/css" href="style.css" title="The Grid" media="all" />
+    <title>Advanced JS</title>
+</head>
+<body >
+  
+<ul id="todo-list">
+  <strong>IMDo App</strong>
+  <li id="todo-add-item"><input type="text" id="add-item-text" size="35"></li>
+  <li id="item1" class="prior-high">Learn about GIT</li>
+  <li id="item2" class="prior-high">Learn about Prototypes</li>
+  <li id="item3" class="prior-low">Experiment with CSS animations</li>
+  <li id="item3" class="prior-medium">Become a JavaScript ninja</li>
+</ul>
+
+<script type="text/javascript">
+  var IMDelement =  function(element) {
+    // body...
+    this.element = element;
+    this.isArray = (element.length > 1)? true : false;
+  }
+
+  IMDelement.prototype.color = function(p_color){
+    this.element.style['color'] = p_color;
+  }
+    var $ = function(p_element){
+      var char = p_element.charAt(0);
+      switch(char){
+          case "#": 
+                    var id = p_element.substring(1, p_element.length);
+                    element = document.getElementById(id);
+                    var result = new IMDelement(element);
+                    return result;
+
+          break;
+          case ".": 
+                    var clss = p_element.substring(1, p_element.length);
+                    var result = document.getElementsByClassName(clss);
+                    return result;
+
+          break;
+
+      }
+    }
+
+    HTMLElement.prototype.color = function(p_color)
+    {
+
+      this.style['color'] = p_color;
+    }
+
+
+</script>
+
+</body>
+</html>
