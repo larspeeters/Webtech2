@@ -6,7 +6,18 @@
 <title>Animation 1</title>
 </head>
 <body>
-<div id="red"  class="circle"></div>
+<div id="red" class="circle"></div>
+<div id="green" class="circle" ></div>
+<div id="yellow" class="circle" ></div>
+
+
+<script>
+$('.circle').click(function() {
+  $('#red').addClass('MoveRed');
+  $('#green').addClass('MoveGreen');
+  $('#yellow').addClass('MoveYellow');
+});
+</script>
 
 </body>
 </html>
