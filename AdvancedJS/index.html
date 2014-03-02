@@ -16,41 +16,84 @@
 </ul>
 
 <script type="text/javascript">
+
+//FRAMEWORK IMDelement
   var IMDelement =  function(element) {
-    // body...
     this.element = element;
     this.isArray = (element.length > 1)? true : false;
+	element.addEventListener('click', function(){ alert("ja"); });
   }
 
+//Change color
   IMDelement.prototype.color = function(p_color){
-    this.element.style['color'] = p_color;
+    if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].style['color'] = p_color;
+				}
+			}
+			else
+			{
+				this.element.style['color'] = p_color;
+			}
+
+			return this.element;
   }
-    var $ = function(p_element){
+ 
+ //Add class
+    IMDelement.prototype.addClass = function(p_class){
+    if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].classList.add(p_class);
+				}
+			}
+	else
+	{
+		this.element.classList.add(p_class);
+	}
+
+			return this.element;
+  }
+
+//Click event
+IMDelement.prototype.click = function(){
+	alert("werkt");
+}
+  
+//Creating $-function
+var $ = function(p_element){
       var char = p_element.charAt(0);
       switch(char){
           case "#": 
                     var id = p_element.substring(1, p_element.length);
-                    element = document.getElementById(id);
+                    var element = document.getElementById(id);
                     var result = new IMDelement(element);
-                    return result;
 
           break;
           case ".": 
                     var clss = p_element.substring(1, p_element.length);
-                    var result = document.getElementsByClassName(clss);
-                    return result;
+                    var elements = document.getElementsByClassName(clss);
+					var result = new IMDelement(elements);
 
           break;
+		  default: var elements = document.getElementsByTagName(p_element);
+		  			var result = new IMDelement(elements);
+		break;
 
       }
+	   return result;
     }
 
-    HTMLElement.prototype.color = function(p_color)
-    {
+$("li").click(function(){
+     $(this).addClass("done");
+});
 
-      this.style['color'] = p_color;
-    }
 
+var list = document.getElementsByTagName("li")[1];
+list.addEventListener('click', click, false);
 
 </script>
 

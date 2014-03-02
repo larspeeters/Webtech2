@@ -31,15 +31,16 @@ li{
 }
 
 .done{
-	background-color: green;
+	background-color: #0C0 !important;
 	text-decoration: line-through;
 }
 .prior-high{
-	background-color: #CC0000;
+	background-color: #900;
 }
 .prior-medium{
-	background-color: #FF1414;
+	background-color: #F60;
+
 }
 .prior-low{
-	background-color: #CC6600;
+		background-color:#C30;
 }
