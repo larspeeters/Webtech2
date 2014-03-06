@@ -21,9 +21,31 @@
   var IMDelement =  function(element) {
     this.element = element;
     this.isArray = (element.length > 1)? true : false;
-	element.addEventListener('click', function(){ alert("ja"); });
   }
 
+//Click
+IMDelement.prototype.click = function(p_click) 
+{
+	if(this.isArray)
+	{
+		for(var i=0, l=this.element.length; i<l; i++)
+		{
+			this.element[i].addEventListener('click', function(e) 
+			{
+				p_click.apply(this);
+				return p_click;
+			});
+		}
+	}
+	else
+	{
+		this.element[0].addEventListener('click', function(e) 
+		{
+			return p_click(e);
+		});
+	}
+}
+		
 //Change color
   IMDelement.prototype.color = function(p_color){
     if(this.isArray)
@@ -57,11 +79,6 @@
 
 			return this.element;
   }
-
-//Click event
-IMDelement.prototype.click = function(){
-	alert("werkt");
-}
   
 //Creating $-function
 var $ = function(p_element){
@@ -88,12 +105,8 @@ var $ = function(p_element){
     }
 
 $("li").click(function(){
-     $(this).addClass("done");
+   new IMDelement(this).addClass("done");
 });
-
-
-var list = document.getElementsByTagName("li")[1];
-list.addEventListener('click', click, false);
 
 </script>
 
