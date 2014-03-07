@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css" title="The Grid" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title>App prototype: weather</title>
+</head>
+<body>
+<div id="location"></div>
+
+<script>
+//Get geolocation
+var x = document.getElementById("location");
+ $( document ).ready(
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML = "Geolocation is not supported by this browser.";}
+  }
+ )
+
+function showPosition(position)
+  {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude; 
+  }
+
+
+//Retrieve weather from geolocation
+/*$.ajax({
+	url: "https://api.forecast.io/forecast/7d08f5b9529fca760325d65623581165/"+lat+","+long,
+	dataType: "jsonp"
+	}).done(
+	function (response){
+		console.log(response);	
+	});*/
+</script>
+</body>
+</html>
