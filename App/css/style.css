@@ -8,19 +8,36 @@ html,body{
 }
 
 #days{
-  background-color: yellow;
+  background-color: grey;
   width: 50px;
   height: 100%;
   float:left;
+  opacity: 0.5;
+}
+
+#listDays{
+  list-style:none;
+  margin-left: -45px;
+  text-align: center;
+}
+
+li{
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+li:hover{
+  color: white;
 }
 
 #today{
-    padding: 10px 10px;
+   padding: 10px 10px 10px 60px;
   background-image:url("http://www.oocities.org/thepowerofprayer/clouds.gif");
   width: 500px;
   height: 100%;
   float:left;
   text-align: center;
+       margin-left: -50px;
 }
 
 #date{
