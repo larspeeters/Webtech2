@@ -5,58 +5,74 @@
   
   weather.prototype.show = function(){
 	  //Get geolocation
-var date = document.getElementById("date");
- var C = document.getElementById("temp");
-  var x = document.getElementById("x");
- var loc = document.getElementById("location");
-var text =  document.getElementById("desc");
 			//Retrieve weather from geolocation
 			  var URL = "https://api.forecast.io/forecast/7d08f5b9529fca760325d65623581165/"+this.lat+","+this.long;
-		//if(localStorage.getItem("location") == null){
-		var location = $.ajax({
+   var now = new Date();
+   if(localStorage.getItem("limit") <= now){   
+      var limit = new Date();
+      limit.setHours(now.getHours()+1);
+      localStorage.setItem("limit", limit);
+      var location = $.ajax({
 			url: URL,
 			dataType: "jsonp",
 			success: function(response){
-				localStorage.setItem("location", response.timezone);
-				localStorage.setItem("temperature", response.currently.temperature);
-				localStorage.setItem("time", response.currently.time);
-				localStorage.setItem("desc", response.currently.summary);
-			  localStorage.setItem("icon", response.currently.icon);
-				var location = localStorage.getItem("location");
-				var temp = localStorage.getItem("temperature");
-				var time = localStorage.getItem("time");
-			  var icon = localStorage.getItem("icon");       
-				var curTime = Time(time);
-				var zone = location.split("/");
-			var desc = localStorage.getItem("desc");
-			  alert(icon);
-			  $("#icon").addClass(showIcon(icon));
-			  date.innerHTML = "<strong>"+getDay(curTime[0])+", "+curTime[2]+"/"+getMonth(curTime[1])+"/"+curTime[3]+"<br />"+curTime[4].substr(0,5)+"</strong>";
-			  C.innerHTML = Math.round((temp - 32)/1.8)+"°C";
-			  loc.innerHTML = zone[1]+", "+zone[0];
-			  text.innerHTML = desc;
-			  
-			}
+				 localStorage.setItem("Forecast", JSON.stringify(response));
+				getForecast();
+            }
 		  });
-		/*}
+	}
 		else{
-			alert("storage!");
-			var location = localStorage.getItem("location");
-				var temp = localStorage.getItem("temperature");
-				var time = localStorage.getItem("time");
-			  var icon = localStorage.getItem("icon");       
-				var curTime = Time(time);
-				var zone = location.split("/");
-			var desc = localStorage.getItem("desc");
-			  alert(icon);
-			  $("#icon").addClass(showIcon(icon));
-			  date.innerHTML = "<strong>"+getDay(curTime[0])+", "+curTime[2]+"/"+getMonth(curTime[1])+"/"+curTime[3]+"<br />"+curTime[4].substr(0,5)+"</strong>";
-			  C.innerHTML = Math.round((temp - 32)/1.8)+"°C";
-			  loc.innerHTML = zone[1]+", "+zone[0];
-			  text.innerHTML = desc;
-		}*/
+            getForecast();
+		}
   }
+  
+  function getForecast(){
+					  var date = document.getElementById("date");
+				 var C = document.getElementById("temp");
+				 var loc = document.getElementById("location");
+				var text =  document.getElementById("desc");
+	           var weather =$.parseJSON( localStorage.getItem("Forecast"));
+				var curTime = Time(weather.currently.time);
+				var zone = weather.timezone.split("/");
+			  $("#icon").addClass(showIcon(weather.currently.icon));
+			  date.innerHTML = "<strong>"+getDay(curTime[0])+", "+curTime[2]+"/"+getMonth(curTime[1])+"/"+curTime[3]+"<br />"+curTime[4].substr(0,5)+"</strong>";
+			  C.innerHTML = Math.round((weather.currently.temperature - 32)/1.8)+"&deg;C";
+			 
+			  loc.innerHTML = zone[1]+", "+zone[0];
+			  text.innerHTML = weather.currently.summary;
+              
+              
+			  //Daily forecast
+              for(var i = 1; i < 8;++i){
+              var day1 = document.getElementById(i);
+              var timed1= Time(weather.daily.data[i].time);
+                day1.innerHTML = getDay(timed1[0])+" "+timed1[2] +"/"+getMonth(timed1[1])+": "+Math.round((weather.daily.data[i].temperatureMax - 32)/1.8)+" &deg;C <br >";
+		}
+	 }
 
+
+  weather.prototype.updateLocation = function(x,y){
+    var Weather = new weather(x,y);
+		  //Get geolocation
+var date = document.getElementById("date");
+ var C = document.getElementById("temp");
+ var loc = document.getElementById("location");
+var text =  document.getElementById("desc");
+			//Retrieve weather from geolocation
+			  var URL = "https://api.forecast.io/forecast/7d08f5b9529fca760325d65623581165/"+x+","+y;
+   var now = new Date();
+     var limit = new Date();
+      limit.setHours(now.getHours()+1);
+      localStorage.setItem("limit", limit);
+      var location = $.ajax({
+			url: URL,
+			dataType: "jsonp",
+			success: function(response){
+				 localStorage.setItem("Forecast", JSON.stringify(response));
+				getForecast();
+            }
+		  });
+  }
  function Time(timeStamp){
    var curDate = new Date(timeStamp*1000).toString();
    curDate = curDate.split(' ');
@@ -86,14 +102,18 @@ var text =  document.getElementById("desc");
       case "Wed" : return "Wednesday"; break;
       case "Thu" : return "Thursday"; break;
       case "Fri" : return "Friday"; break;
+     case "Sat" : return "Saturday"; break;
+        case "Sun" : return "Sunday"; break;
     }
   }
   
   function showIcon(ico){
     switch(ico){
-      case "partly-cloudy-night": return "cloudy"; break; 
+      case "partly-cloudy-night": return "cloudyN"; break; 
+      case "partly-cloudy-day": return "cloudyD"; break;
       case "clear-day": return "sunny"; break; 
       case "clear-night": return "clearNight"; break;
     }
   }
-
+  
+  

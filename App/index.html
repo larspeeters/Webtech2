@@ -3,32 +3,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" title="The Grid" media="all" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="js/weather.js"></script>
 <title>App prototype: weather</title>
 </head>
-<body>
-<div id="days">
-  <ul id="listDays">
-    <li>Fri <br/>14/03 </li>
-    <li>Sat <br/>15/03 </li>
-    <li>Sun <br/>16/03 </li>
-    <li>Mon <br/>17/03 </li>
-    <li>Tue <br/>18/03 </li>
-    <li>Wed <br/>19/03 </li>
-    <li>Thu <br/>20/03 </li>
-  </ul>
-</div>
-<div id="today" >
+<body >
+  <div id="forecast" >
+    
+    <div id="today" >
   <div id="date"></div>
     <div id="location" ></div>
   <div id="icon"></div>
   <div id="temp"> </div>
   <div id="desc"> </div>
+</div>
+<div id="daily">
+  <div id="1" class="dailyFore"> </div>
+  <div id="2" class="dailyFore"> </div>
+  <div id="3" class="dailyFore"> </div>
+  <div id="4" class="dailyFore"> </div>
+  <div id="5" class="dailyFore"> </div>
+  <div id="6" class="dailyFore"> </div>
+  <div id="7" class="dailyFore"> </div>
+  <input type="text" id="place" placeholder="Change location" />
+  <input type="submit" id="btnChange" value="Change" />
+</div>
   </div>
-
 
 <script>
   $( document ).ready(
+ 
   //Get current location
 	function getLocation()
 	  {
@@ -37,14 +41,25 @@
 		navigator.geolocation.getCurrentPosition(showPosition);
 		}
 	  else{x.innerHTML = "Geolocation is not supported by this browser.";}
-	  }
+	  }     
  )
  
  function showPosition(position)
   {
-		var w = new weather(position.coords.latitude,position.coords.longitude);
-		w.show();
+		var Weather = new weather(position.coords.latitude,position.coords.longitude);
+		Weather.show();
   }
+ $("#btnChange").click(function(){
+ var geocoder =  new google.maps.Geocoder();
+    geocoder.geocode( { 'address': $('#place').val()}, function(results, status) {
+       if (status == google.maps.GeocoderStatus.OK) {     
+	    var Weather = new weather(); 
+		Weather.updateLocation(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+          } else {
+            alert("Something got wrong " + status);
+          }
+        });
+    });
 </script>
 </body>
 </html>
