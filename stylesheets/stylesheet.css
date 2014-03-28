@@ -246,7 +246,11 @@ a {
   zoom:1;
 }
 
-#menu{
-	list-style:none;
+nav{
 	float:left;
+	margin-left: 100px;
+}
+
+li{
+	list-style:none;
 }
