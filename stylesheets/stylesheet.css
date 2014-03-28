@@ -131,6 +131,7 @@ dt {
 
 ul li {
   list-style: none;
+  text-decoration: none;
 }
 
 ul li:before {
@@ -249,3 +250,6 @@ nav{
 	float:left;
 	margin-left: 10%;
 }
+
+nav a{
+	text-decoration: none;}
