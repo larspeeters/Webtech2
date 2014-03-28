@@ -1,0 +1,46 @@
+html, body{
+
+	font-family: sans-serif, arial;
+	font-size: 14px;
+}
+
+#todo-list{
+	 background-color: black;
+	 color: white;
+	 width: 300px;
+	 padding: 6px 6px;
+	 list-style: none;
+}
+
+strong{
+	font-size: 24px;
+}
+
+#todo-add-item{
+	background-color: #3D3D3D;
+}
+
+input{
+	background-color: #C2C2C2;
+}
+
+li{
+	padding: 6px 6px;
+	font-weight: bold;
+	cursor:pointer;
+}
+
+.done{
+	background-color: #0C0 !important;
+	text-decoration: line-through;
+}
+.prior-high{
+	background-color: #900;
+}
+.prior-medium{
+	background-color: #F60;
+
+}
+.prior-low{
+		background-color:#C30;
+}

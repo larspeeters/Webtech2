@@ -1,0 +1,114 @@
+<!DOCTYPE html >
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" type="text/css" href="style.css" title="The Grid" media="all" />
+    <title>Advanced JS</title>
+</head>
+<body >
+  
+<ul id="todo-list">
+  <strong>IMDo App</strong>
+  <li id="todo-add-item"><input type="text" id="add-item-text" size="35"></li>
+  <li id="item1" class="prior-high">Learn about GIT</li>
+  <li id="item2" class="prior-high">Learn about Prototypes</li>
+  <li id="item3" class="prior-low">Experiment with CSS animations</li>
+  <li id="item3" class="prior-medium">Become a JavaScript ninja</li>
+</ul>
+
+<script type="text/javascript">
+
+//FRAMEWORK IMDelement
+  var IMDelement =  function(element) {
+    this.element = element;
+    this.isArray = (element.length > 1)? true : false;
+  }
+
+//Click
+IMDelement.prototype.click = function(p_click) 
+{
+	if(this.isArray)
+	{
+		for(var i=0, l=this.element.length; i<l; i++)
+		{
+			this.element[i].addEventListener('click', function(e) 
+			{
+				p_click.apply(this);
+				return p_click;
+			});
+		}
+	}
+	else
+	{
+		this.element[0].addEventListener('click', function(e) 
+		{
+			return p_click(e);
+		});
+	}
+}
+		
+//Change color
+  IMDelement.prototype.color = function(p_color){
+    if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].style['color'] = p_color;
+				}
+			}
+			else
+			{
+				this.element.style['color'] = p_color;
+			}
+
+			return this.element;
+  }
+ 
+ //Add class
+    IMDelement.prototype.addClass = function(p_class){
+    if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].classList.add(p_class);
+				}
+			}
+	else
+	{
+		this.element.classList.add(p_class);
+	}
+
+			return this.element;
+  }
+  
+//Creating $-function
+var $ = function(p_element){
+      var char = p_element.charAt(0);
+      switch(char){
+          case "#": 
+                    var id = p_element.substring(1, p_element.length);
+                    var element = document.getElementById(id);
+                    var result = new IMDelement(element);
+
+          break;
+          case ".": 
+                    var clss = p_element.substring(1, p_element.length);
+                    var elements = document.getElementsByClassName(clss);
+					var result = new IMDelement(elements);
+
+          break;
+		  default: var elements = document.getElementsByTagName(p_element);
+		  			var result = new IMDelement(elements);
+		break;
+
+      }
+	   return result;
+    }
+
+$("li").click(function(){
+   new IMDelement(this).addClass("done");
+});
+
+</script>
+
+</body>
+</html>

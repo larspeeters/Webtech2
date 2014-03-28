@@ -1,0 +1,36 @@
+.circle{width: 25px;
+ height: 25px;
+ border-radius: 50%;
+ position: absolute;
+ transition: transform 1s;
+ -webkit-transition: -webkit-transform 1s;
+ -moz-transition: -webkit-transform 1s;
+ cursor:pointer;
+
+}
+
+#red{ background-color: #e74c3c;
+}
+#green{ background-color:#3C0;
+}
+#yellow{ background-color:#FF0;
+}
+.MoveRed{
+	transform:translateX(50px);
+	-webkit-transform: translateX(50px);
+	-moz-transform: translateX(50px);
+	-ms-transform: translateX(50px);
+}
+.MoveGreen{
+	transform:translate(50px,50px);
+	-webkit-transform: translate(50px,50px);
+	-moz-transform: translate(50px,50px);
+	-ms-transform: translate(50px,50px);
+}
+.MoveYellow{
+	transform:translateY(50px);
+	-webkit-transform: translateY(50px);
+	-moz-transform: translateY(50px);
+	-ms-transform: translateY(50px);
+	transform: translateY(50px);
+}

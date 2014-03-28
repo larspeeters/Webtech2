@@ -1,0 +1,65 @@
+<!DOCTYPE html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" title="The Grid" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="js/weather.js"></script>
+<title>App prototype: weather</title>
+</head>
+<body >
+  <div id="forecast" >
+    
+    <div id="today" >
+  <div id="date"></div>
+    <div id="location" ></div>
+  <div id="icon"></div>
+  <div id="temp"> </div>
+  <div id="desc"> </div>
+</div>
+<div id="daily">
+  <div id="1" class="dailyFore"> </div>
+  <div id="2" class="dailyFore"> </div>
+  <div id="3" class="dailyFore"> </div>
+  <div id="4" class="dailyFore"> </div>
+  <div id="5" class="dailyFore"> </div>
+  <div id="6" class="dailyFore"> </div>
+  <div id="7" class="dailyFore"> </div>
+  <input type="text" id="place" placeholder="Change location" />
+  <input type="submit" id="btnChange" value="Change" />
+</div>
+  </div>
+
+<script>
+  $( document ).ready(
+ 
+  //Get current location
+	function getLocation()
+	  {
+	  if (navigator.geolocation)
+		{
+		navigator.geolocation.getCurrentPosition(showPosition);
+		}
+	  else{x.innerHTML = "Geolocation is not supported by this browser.";}
+	  }     
+ )
+ 
+ function showPosition(position)
+  {
+		var Weather = new weather(position.coords.latitude,position.coords.longitude);
+		Weather.show();
+  }
+ $("#btnChange").click(function(){
+ var geocoder =  new google.maps.Geocoder();
+    geocoder.geocode( { 'address': $('#place').val()}, function(results, status) {
+       if (status == google.maps.GeocoderStatus.OK) {     
+	    var Weather = new weather(); 
+		Weather.updateLocation(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+          } else {
+            alert("Something got wrong " + status);
+          }
+        });
+    });
+</script>
+</body>
+</html>
