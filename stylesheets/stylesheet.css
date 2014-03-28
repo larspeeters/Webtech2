@@ -245,3 +245,8 @@ a {
 .cf {
   zoom:1;
 }
+
+#menu{
+	list-style:none;
+	float:left;
+}
