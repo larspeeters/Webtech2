@@ -256,6 +256,11 @@ nav a{
 	color: #b5e853;
 }
 
+nav ul{
+	background-color: black;
+	padding: 5px 5px;
+}
+
 nav li{
 		padding-bottom: 10px;
 }
