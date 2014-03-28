@@ -257,7 +257,6 @@ nav a{
 }
 
 nav ul{
-	background-color: black;
 	padding: 15px 15px;
 	width: 200px;
 }
@@ -265,4 +264,8 @@ nav ul{
 nav li{
 		padding-bottom: 10px;
 		text-align: center;
+}
+
+nav li:hover{
+		background-color: black;
 }
