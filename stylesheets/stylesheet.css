@@ -248,6 +248,7 @@ a {
 nav{
 	float:left;
 	margin-left: 10%;
+	position:fixed;
 }
 
 nav a{
