@@ -272,8 +272,3 @@ nav li:hover{
 		opacity: 0.5;
 }
 
-.active{
-background-color: black;
-		border-radius: 5px;
-		opacity: 0.5;
-}
