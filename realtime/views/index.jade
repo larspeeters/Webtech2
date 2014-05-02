@@ -1,0 +1,12 @@
+extends layout
+
+block content
+		div.container
+					header
+						h1 WebChat
+					div#chatUsers
+					div#chatEntries
+					div.row#entries
+					div#chatControls
+						input(type='text')#messageInput
+						button.btn#submit(data-loading-text="Send") Send
